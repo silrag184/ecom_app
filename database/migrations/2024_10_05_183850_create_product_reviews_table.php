@@ -13,10 +13,6 @@ return new class extends Migration
     {
         Schema::create('product_reviews', function (Blueprint $table) {
             $table->id();
-            $table->integer('customer_id');
-            $table->integer('product_id');
-            $table->text('review');
-            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }
