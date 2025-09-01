@@ -113,7 +113,7 @@ class Product extends Model
 
         $product->stock_amount          = $request->stock_amount;
         $product->save();
-        return $product;
+        return $product;   
 
     }
 
