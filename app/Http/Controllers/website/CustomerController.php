@@ -31,8 +31,8 @@ class CustomerController extends Controller
 
     public function saveCustomerInfo(Request $request){
         Customer::saveInfo($request);
-        Session::put('customer_id', $this->customer->id);
-        Session::put('customer_name', $this->customer->name);
+//        Session::put('customer_id', $this->customer->id);
+//        Session::put('customer_name', $this->customer->name);
         return back();
 
     }
@@ -45,7 +45,7 @@ class CustomerController extends Controller
             Session::forget(Session::get('product_id'));
             return  redirect('/product/details/'.$productId);
         }
-        return redirect('/customer/dashboard');
+        return back();
     }
 
     public function logout(){
@@ -108,6 +108,32 @@ class CustomerController extends Controller
 
     public function customerChangePassword(){
         return view('website.customer.change-password');
+    }
+
+    public function customerPasswordUpdate(Request $request, $id){
+
+        $request->validate([
+            'customer_id' => 'required|exists:customers,id', // Ensure the customer exists
+            'current_password' => 'required',
+            'new_password' => 'required|min:8|confirmed', // Ensure confirmation of the new password
+        ]);
+
+        // Find the customer by ID
+        $customer = Customer::find($request->customer_id);
+
+        if (!$customer) {
+            return response()->json(['error' => 'Customer not found'], 404);
+        }
+
+        // Call the model's updatePassword method
+        $result = $customer->updatePassword($request->current_password, $request->new_password);
+
+        // If the result is not true, return an error
+        if ($result !== true) {
+            return response()->json(['error' => $result], 400);
+        }
+
+        return response()->json(['message' => 'Password updated successfully.']);
     }
 
     public function deleteWishlist($id){

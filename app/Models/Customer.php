@@ -98,5 +98,18 @@ class Customer extends Model
         self::$customer->save();
 
     }
+
+    public static function updatePassword($currentPassword, $newPassword){
+        if (!Hash::check($currentPassword, $this->password)) {
+            return 'Current password is incorrect.';
+        }
+
+        // If current password is correct, hash and update the password
+        $this->password = Hash::make($newPassword);
+        $this->save();
+
+        return true;
+
+    }
 }
 

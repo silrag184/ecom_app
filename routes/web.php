@@ -70,6 +70,7 @@ Route::post('/customer/update-profile/{id}',[CustomerController::class,'customer
 Route::get('/customer/order',[CustomerController::class,'customerOrder'])->name('customer.order');
 
 Route::get('/customer/change-password',[CustomerController::class,'customerChangePassword'])->name('customer.change-password');
+Route::post('/customer/update-password/{id}',[CustomerController::class,'customerPasswordUpdate'])->name('customer.update-password');
 
 Route::get('/customer/wishlist/show',[CustomerController::class,'customerWishlist'])->name('customer.wishlist.show');
 Route::get('/customer/wishlist/{id}',[CustomerController::class,'wishlist'])->name('customer.wishlist');

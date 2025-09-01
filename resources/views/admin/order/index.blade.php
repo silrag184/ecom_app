@@ -60,7 +60,9 @@
                                                 <td>{{ $order->order_date }}</td>
                                                 <td>{{ $order->order_total }} BDT</td>
                                                 <td>{{ $order->order_status }}</td>
-                                                <td>{!! $order->customer->name.'<br/>'.$order->customer->phone !!}</td>
+                                                <td>{!! $order->customer ? ($order->customer->name. '<br>'. $order->customer->phone) : 'N/A' !!}</td>
+
+{{--                                                <td>{!! $order->customer->name.'<br/>'.$order->customer->phone !!}</td>--}}
                                                 <td class="justify-content-center">
                                                     <a title="View Order Detail" href="{{ route('admin-order.detail', ['id' => $order->id]) }}" class="btn btn-success btn-sm me-2 float-start">
                                                         <i class="fa fa-book"></i>

@@ -29,9 +29,37 @@
                     <div class="dashboard-right">
                         <div class="dashboard">
                             <div class="page-title">
-                                <h2>My Profile</h2></div>
-                            <div class="box-account box-info">
+                                <h2>My Profile</h2>
+                            </div>
+                            <div class="theme-card">
+                                <h3 class="text-center">Change Password</h3>
+                                <form class="theme-form" method="POST" action="{{ route('customer.update-password',['id' =>$customer->id]) }}">
+                                    @csrf
+                                    <div class="row g-3">
+                                        <div class="col-md-12 form-group">
+                                            <label for="current_password">Current Password:</label>
+                                            <input class="form-control" type="password" name="current_password" required>
+                                            <input type="hidden" name="customer_id" value="{{ $customer->password }}"> <!-- Pass user ID -->
+                                            <label for="current_password">Current Password:</label>
+                                            <input type="password" name="current_password" required>
+                                        </div>
+                                    </div>
+                                    <div class="row g-3">
+                                        <div class="col-md-12 form-group">
+                                            <label for="new_password">New Password:</label>
+                                            <input class="form-control" type="password" name="new_password" required>
+                                        </div>
+                                    </div>
 
+                                    <div class="row g-3">
+                                        <div class="col-md-12 form-group">
+                                            <label for="new_password_confirmation">Confirm New Password:</label>
+                                            <input class="form-control" type="password" name="new_password_confirmation" required>
+                                        </div>
+                                    </div>
+
+                                    <button class="btn-block btn btn-primary" type="submit">Change Password</button>
+                                </form>
                             </div>
                         </div>
                     </div>
